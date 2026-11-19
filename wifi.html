@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wifi gratis en la cancha · R.E.L.E. y WAR</title>
+<meta name="description" content="Internet gratis en la cancha, cortesía de R.E.L.E., WAR, Acoterm, Wessite y Liga AGL.">
+<meta name="theme-color" content="#16251B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2316251B'/%3E%3Crect x='22' y='22' width='56' height='56' rx='12' fill='none' stroke='%238CC63F' stroke-width='9'/%3E%3Cpath d='M50 22v56M22 50h56' stroke='%238CC63F' stroke-width='8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fondo:#16251B; --fondo-2:#1E3326; --verde:#8CC63F; --verde-suave:#B9DD8A;
+    --texto:#F3F6EF; --texto-2:#C5D2C0; --borde:#2E4A37;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--fondo);color:var(--texto)}
+  body{
+    font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+    padding:max(28px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom));
+    background-image:linear-gradient(var(--borde) 1px,transparent 1px),linear-gradient(90deg,var(--borde) 1px,transparent 1px);
+    background-size:44px 44px;background-position:center top;
+  }
+  main{max-width:440px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+  .wifi-icono{width:84px;height:84px;margin-top:4px;color:var(--verde)}
+  h1{font-family:'Outfit','Segoe UI',sans-serif;font-weight:700;font-size:36px;margin:12px 0 6px;line-height:1.05;text-align:center}
+  .lema{margin:0 0 22px;font-size:17px;color:var(--texto-2);text-align:center;line-height:1.35}
+  h2{align-self:flex-start;font-size:15px;font-weight:600;color:var(--texto-2);margin:0 0 10px 4px}
+  .redes{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+  .red{background:var(--fondo-2);border:1px solid var(--borde);border-radius:14px;padding:16px}
+  .fila{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .etiqueta{font-size:14px;color:var(--texto-2)}
+  .valor{font-size:19px;font-weight:600;word-break:break-all;text-align:right}
+  .fila + .fila{margin-top:8px}
+  .copiar{
+    margin-top:14px;width:100%;min-height:50px;border-radius:12px;border:0;cursor:pointer;
+    background:var(--verde);color:var(--fondo);font:600 17px 'Source Sans 3',system-ui,sans-serif;
+  }
+  .aviso{
+    width:100%;background:var(--fondo-2);border:1px dashed var(--verde);border-radius:14px;
+    padding:18px;text-align:center;font-size:17px;line-height:1.4;margin-bottom:24px
+  }
+  .pasos{width:100%;margin:0 0 24px;padding:0 0 0 22px;color:var(--texto-2);font-size:16px;line-height:1.5}
+  .patrocinadores{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+  .patro{
+    display:flex;flex-direction:column;justify-content:center;min-height:74px;padding:12px 14px;border-radius:14px;
+    background:var(--fondo-2);border:1px solid var(--borde);color:var(--texto);text-decoration:none;
+  }
+  a.patro:hover{border-color:var(--verde)}
+  .patro b{font-family:'Outfit',sans-serif;font-size:18px}
+  .patro span{font-size:13px;color:var(--texto-2);margin-top:2px;line-height:1.25}
+  .patro.ancho{grid-column:1/-1}
+  .tarjeta{
+    width:100%;min-height:56px;border-radius:14px;border:2px solid var(--verde);color:var(--verde-suave);
+    display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:600;font-size:17px
+  }
+  footer{margin-top:22px;font-size:14px;color:var(--texto-2);text-align:center}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--verde-suave);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <svg class="wifi-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0"/><path d="M5 12.6a10 10 0 0 1 14 0"/><path d="M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+  <h1>Wifi gratis en la cancha</h1>
+  <p class="lema">Cortesía de los patrocinadores de la liga</p>
+
+  <h2>Conéctate</h2>
+  <div class="redes" id="redes"></div>
+
+  <ol class="pasos">
+    <li>Toca <b>Copiar contraseña</b>.</li>
+    <li>Abre <b>Ajustes → Wifi</b> en tu celular.</li>
+    <li>Elige la red con ese nombre y pega la contraseña.</li>
+  </ol>
+
+  <h2>Patrocinadores</h2>
+  <div class="patrocinadores">
+    <a class="patro" href="https://relegpe24-source.github.io/rele-sitio/" target="_blank" rel="noopener"><b>R.E.L.E.</b><span>Reparación y limpieza de computadoras</span></a>
+    <a class="patro" href="https://warcompany.com.mx/" target="_blank" rel="noopener"><b>WAR</b><span>Sistemas y automatización para negocios</span></a>
+    <div class="patro"><b>Acoterm</b><span>Climas y refrigeración</span></div>
+    <div class="patro"><b>Wessite</b><span>Páginas web y chatbots</span></div>
+    <div class="patro ancho"><b>Liga AGL</b><span>Gracias por el apoyo a la liga</span></div>
+  </div>
+
+  <a class="tarjeta" href="./">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 10h5M14 14h4"/></svg>
+    Ver tarjeta de contacto de R.E.L.E.
+  </a>
+
+  <footer>¿Tu negocio necesita un sistema o su propia red wifi? Escríbenos.</footer>
+</main>
+
+<script>
+  /* ===== EDITA AQUÍ LAS REDES WIFI =====
+     Agrega una línea por cada celular o módem que vas a compartir.
+     Ejemplo: { nombre: "RELE-WAR Wifi 1", clave: "liga2026" },
+     Mientras la lista esté vacía, la página muestra un aviso de "Próximamente". */
+  const REDES = [
+  ];
+
+  const cont = document.getElementById('redes');
+  const pasos = document.querySelector('.pasos');
+  if (REDES.length === 0) {
+    cont.outerHTML = '<div class="aviso">📶 El wifi gratis se activa muy pronto.<br>Guarda esta página y vuelve a escanear en el próximo partido.</div>';
+    pasos.remove();
+  } else {
+    REDES.forEach(function (r) {
+      const caja = document.createElement('div');
+      caja.className = 'red';
+      caja.innerHTML =
+        '<div class="fila"><span class="etiqueta">Red</span><span class="valor"></span></div>' +
+        '<div class="fila"><span class="etiqueta">Contraseña</span><span class="valor"></span></div>' +
+        '<button class="copiar" type="button">Copiar contraseña</button>';
+      const v = caja.querySelectorAll('.valor');
+      v[0].textContent = r.nombre;
+      v[1].textContent = r.clave;
+      const b = caja.querySelector('.copiar');
+      b.addEventListener('click', function () {
+        const listo = function () { b.textContent = '¡Copiada! Ahora ve a Ajustes → Wifi'; };
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(r.clave).then(listo, function () { b.textContent = 'Contraseña: ' + r.clave; });
+        } else { b.textContent = 'Contraseña: ' + r.clave; }
+      });
+      cont.appendChild(caja);
+    });
+  }
+</script>
+</body>
+</html>
