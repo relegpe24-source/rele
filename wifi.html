@@ -42,6 +42,19 @@
     padding:18px;text-align:center;font-size:17px;line-height:1.4;margin-bottom:24px
   }
   .pasos{width:100%;margin:0 0 24px;padding:0 0 0 22px;color:var(--texto-2);font-size:16px;line-height:1.5}
+  .paso{width:100%;margin-bottom:14px}
+  .paso[hidden]{display:none}
+  .paso h2{font-family:'Outfit',sans-serif;font-size:21px;color:var(--texto);margin:0 0 10px;align-self:auto}
+  .texto{margin:0 0 12px;font-size:16px;line-height:1.4;color:var(--texto-2);text-align:center}
+  .texto b,.clave b,.nota b{color:var(--texto)}
+  .accion{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;border-radius:14px;border:0;background:var(--verde);color:var(--fondo);font:700 17px 'Source Sans 3',system-ui,sans-serif;text-decoration:none;cursor:pointer}
+  .red-lista{display:flex;gap:8px;margin:0 0 12px}
+  .red-lista span{flex:1;text-align:center;padding:12px 4px;border-radius:10px;border:1px solid var(--borde);background:var(--fondo-2);font-weight:600}
+  .red-lista span.elegida{border-color:var(--verde);background:rgba(140,198,63,.16);color:var(--verde-suave)}
+  .clave{font-size:18px;margin:0 0 10px;text-align:center;color:var(--texto-2)}
+  .nota{font-size:14px;color:var(--texto-2);margin:12px 0 0;line-height:1.4;text-align:center}
+  .interes{display:block;width:100%;margin:0 0 24px;padding:12px 10px;border-radius:12px;border:1px dashed var(--verde);text-align:center;color:var(--texto-2);font-size:15px;line-height:1.35;text-decoration:none}
+  .interes b{color:var(--verde-suave)}
   .patrocinadores{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
   .patro{
     display:flex;flex-direction:column;justify-content:center;min-height:74px;padding:12px 14px;border-radius:14px;
@@ -65,14 +78,19 @@
   <h1>Wifi gratis en la cancha</h1>
   <p class="lema">Cortesía de los patrocinadores de la liga</p>
 
-  <h2>Conéctate</h2>
-  <div class="redes" id="redes"></div>
-
-  <ol class="pasos">
-    <li>Toca <b>Copiar contraseña</b>.</li>
-    <li>Abre <b>Ajustes → Wifi</b> en tu celular.</li>
-    <li>Elige la red con ese nombre y pega la contraseña.</li>
-  </ol>
+  <div class="paso" id="paso1">
+    <p class="texto">Para darte acceso, guarda nuestros contactos. Así te enteras de promociones y resultados de la liga en nuestros estados de WhatsApp.</p>
+    <a class="accion" id="guardarYConectar" href="contactos.vcf" download="War-Company-contactos.vcf">Guardar contactos y conectarme</a>
+  </div>
+  <div class="paso" id="paso2" hidden>
+    <h2>¡Listo! Conéctate a una de estas redes</h2>
+    <p class="texto">Te recomendamos: <b id="redSugerida"></b></p>
+    <div class="red-lista"><span>War-fix</span><span>War-fiy</span><span>War-fiz</span></div>
+    <p class="clave">Contraseña: <b>LigaAGL</b></p>
+    <button class="accion" type="button" id="copiarClave">Copiar contraseña</button>
+    <p class="nota">Abre <b>Ajustes → Wifi</b>, elige la red y pega la contraseña. Si tu celular no guardó los contactos, abre el archivo que se descargó.</p>
+  </div>
+  <a class="interes" href="https://wa.me/528124425417?text=Hola%20Jorge%2C%20me%20conect%C3%A9%20al%20wifi%20de%20la%20cancha%20y%20me%20interes%C3%B3%20c%C3%B3mo%20lo%20hicieron.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%3F" target="_blank" rel="noopener">¿Te gustó este sistema? <b>Quiero saber cómo lo hicieron</b></a>
 
   <h2>Patrocinadores</h2>
   <div class="patrocinadores">
@@ -92,42 +110,33 @@
 </main>
 
 <script>
-  /* ===== EDITA AQUÍ LAS REDES WIFI =====
-     Agrega una línea por cada celular o módem que vas a compartir.
-     Ejemplo: { nombre: "RELE-WAR Wifi 1", clave: "liga2026" },
-     Mientras la lista esté vacía, la página muestra un aviso de "Próximamente". */
-  const REDES = [
-    { nombre: "War-fix", clave: "LigaAGL" },
-    { nombre: "War-fiy", clave: "LigaAGL" },
-    { nombre: "War-fiz", clave: "LigaAGL" },
-  ];
+  /* Redes públicas para la cancha. NoWar-fi (transmisión) NO va aquí. */
+  var REDES = ['War-fix', 'War-fiy', 'War-fiz'];
+  var CLAVE = 'LigaAGL';
 
-  const cont = document.getElementById('redes');
-  const pasos = document.querySelector('.pasos');
-  if (REDES.length === 0) {
-    cont.outerHTML = '<div class="aviso">📶 El wifi gratis se activa muy pronto.<br>Guarda esta página y vuelve a escanear en el próximo partido.</div>';
-    pasos.remove();
-  } else {
-    REDES.forEach(function (r) {
-      const caja = document.createElement('div');
-      caja.className = 'red';
-      caja.innerHTML =
-        '<div class="fila"><span class="etiqueta">Red</span><span class="valor"></span></div>' +
-        '<div class="fila"><span class="etiqueta">Contraseña</span><span class="valor"></span></div>' +
-        '<button class="copiar" type="button">Copiar contraseña</button>';
-      const v = caja.querySelectorAll('.valor');
-      v[0].textContent = r.nombre;
-      v[1].textContent = r.clave;
-      const b = caja.querySelector('.copiar');
-      b.addEventListener('click', function () {
-        const listo = function () { b.textContent = '¡Copiada! Ahora ve a Ajustes → Wifi'; };
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(r.clave).then(listo, function () { b.textContent = 'Contraseña: ' + r.clave; });
-        } else { b.textContent = 'Contraseña: ' + r.clave; }
-      });
-      cont.appendChild(caja);
+  function mostrarRedes() {
+    // Reparte a la gente entre las 3 redes al azar, para que no se llene solo una.
+    var guardada = null;
+    try { guardada = localStorage.getItem('redWifi'); } catch (e) {}
+    var red = REDES.indexOf(guardada) >= 0 ? guardada : REDES[Math.floor(Math.random() * REDES.length)];
+    try { localStorage.setItem('redWifi', red); } catch (e) {}
+    document.getElementById('redSugerida').textContent = red;
+    document.querySelectorAll('.red-lista span').forEach(function (s) {
+      s.classList.toggle('elegida', s.textContent === red);
     });
+    document.getElementById('paso1').hidden = true;
+    document.getElementById('paso2').hidden = false;
   }
+  document.getElementById('guardarYConectar').addEventListener('click', function () {
+    setTimeout(mostrarRedes, 1200);
+  });
+  document.getElementById('copiarClave').addEventListener('click', function () {
+    var b = this;
+    var listo = function () { b.textContent = '¡Copiada! Ahora ve a Ajustes → Wifi'; };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(CLAVE).then(listo, function () { b.textContent = 'Contraseña: ' + CLAVE; });
+    } else { b.textContent = 'Contraseña: ' + CLAVE; }
+  });
 </script>
 </body>
 </html>
