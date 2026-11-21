@@ -1,0 +1,21 @@
+BEGIN:VCARD
+VERSION:3.0
+N:García;Jorge;;;
+FN:R.E.L.E. - Jorge García
+ORG:R.E.L.E. Reparación de electrónicos y limpieza de equipos
+TITLE:WAR Company
+TEL;TYPE=CELL:+528124425417
+TEL;TYPE=VOICE:+528140155199
+EMAIL:relegpe24@gmail.com
+URL:https://relegpe24-source.github.io/rele/
+NOTE:Reparación y mantenimiento de computadoras. Sistemas y automatización para negocios (WAR Company - warcompany.com.mx).
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Wessite;;;;
+FN:Wessite - Páginas web
+ORG:Wessite
+TEL;TYPE=CELL:+528132524380
+URL:https://www.instagram.com/webside24/
+NOTE:Páginas web y chatbots. Parte de WAR Company.
+END:VCARD

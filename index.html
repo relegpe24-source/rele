@@ -56,7 +56,21 @@
   .wifi{
     width:100%;min-height:58px;margin:-8px 0 18px;border-radius:14px;background:var(--verde-suave);color:var(--fondo);
     display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;
+    border:0;cursor:pointer;font-family:inherit;
   }
+  .velo{position:fixed;inset:0;background:rgba(5,12,8,.78);display:flex;align-items:flex-end;justify-content:center;padding:16px;z-index:10}
+  .velo[hidden]{display:none}
+  .caja{position:relative;width:100%;max-width:440px;background:var(--fondo-2);border:1px solid var(--verde);border-radius:18px;padding:22px 20px 20px;margin-bottom:max(0px,env(safe-area-inset-bottom))}
+  .caja h2{font-family:'Outfit',sans-serif;font-size:22px;margin:0 30px 10px 0;line-height:1.2}
+  .caja p{margin:0 0 12px;font-size:16px;line-height:1.4;color:var(--texto-2)}
+  .caja b{color:var(--texto)}
+  .cerrar{position:absolute;top:10px;right:12px;width:36px;height:36px;border:0;background:none;color:var(--texto-2);font-size:28px;cursor:pointer}
+  .accion{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;margin-top:6px;border-radius:14px;border:0;background:var(--verde);color:var(--fondo);font:700 17px 'Source Sans 3',system-ui,sans-serif;text-decoration:none;cursor:pointer}
+  .red-lista{display:flex;gap:8px;margin:0 0 12px}
+  .red-lista span{flex:1;text-align:center;padding:10px 4px;border-radius:10px;border:1px solid var(--borde);font-weight:600}
+  .red-lista span.elegida{border-color:var(--verde);background:rgba(140,198,63,.16);color:var(--verde-suave)}
+  .clave{font-size:18px !important}
+  .nota{font-size:14px !important;margin-top:12px !important}
   footer{margin-top:26px;font-size:14px;color:var(--texto-2);text-align:center}
   a:focus-visible{outline:3px solid var(--verde-suave);outline-offset:3px}
   @media (prefers-reduced-motion:reduce){.enlace{transition:none}}
@@ -77,10 +91,33 @@
   <p class="lema">Reparación de electrónicos y limpieza de equipos</p>
   <p class="zona">Guadalupe, Monterrey y área metropolitana</p>
 
-  <a class="wifi" href="wifi.html">
+  <button class="wifi" type="button" id="abrirWifi">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0"/><path d="M5 12.6a10 10 0 0 1 14 0"/><path d="M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
-    Wifi gratis en la cancha
-  </a>
+    Quiero wifi gratis
+  </button>
+
+  <!-- ===== VENTANA DEL WIFI ===== -->
+  <div class="velo" id="velo" hidden>
+    <div class="caja" role="dialog" aria-modal="true" aria-labelledby="tituloWifi">
+      <button class="cerrar" type="button" id="cerrarWifi" aria-label="Cerrar">×</button>
+      <div id="paso1">
+        <h2 id="tituloWifi">📶 Wifi gratis en la cancha</h2>
+        <p>Cortesía de <b>R.E.L.E.</b>, <b>WAR</b>, <b>Wessite</b> y <b>Acoterm</b>.</p>
+        <p>Para darte acceso, guarda nuestros contactos. Así te enteras de promociones y resultados de la liga en nuestros estados de WhatsApp.</p>
+        <a class="accion" id="guardarYConectar" href="contactos.vcf" download="War-Company-contactos.vcf">Guardar contactos y conectarme</a>
+      </div>
+      <div id="paso2" hidden>
+        <h2>¡Listo! Conéctate a una de estas redes</h2>
+        <p class="sugerida">Te recomendamos: <b id="redSugerida"></b></p>
+        <div class="red-lista">
+          <span>War-fix</span><span>War-fiy</span><span>War-fiz</span>
+        </div>
+        <p class="clave">Contraseña: <b id="claveWifi">LigaAGL</b></p>
+        <button class="accion" type="button" id="copiarClave">Copiar contraseña</button>
+        <p class="nota">Abre <b>Ajustes → Wifi</b>, elige la red y pega la contraseña. Si tu celular no guardó los contactos, abre el archivo que se descargó.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== EDITA AQUÍ TUS DATOS DE CONTACTO ===== -->
   <div class="principales">
@@ -104,6 +141,12 @@
     <li><a class="enlace" href="https://warcompany.com.mx/" target="_blank" rel="noopener">
       <span class="icono"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
       <span>WAR<small>Soluciones integrales para empresas</small></span></a></li>
+    <li><a class="enlace" href="https://www.instagram.com/webside24/" target="_blank" rel="noopener">
+      <span class="icono"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span>
+      <span>Wessite<small>Páginas web y chatbots · Instagram</small></span></a></li>
+    <li><a class="enlace" href="https://www.facebook.com/profile.php?id=61555287631316" target="_blank" rel="noopener">
+      <span class="icono"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span>
+      <span>Wessite<small>Páginas web y chatbots · Facebook</small></span></a></li>
     <li><a class="enlace" href="https://www.instagram.com/relegpe/" target="_blank" rel="noopener">
       <span class="icono"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></span>
       <span>Instagram<small>Fotos de nuestros trabajos</small></span></a></li>
@@ -131,5 +174,42 @@
 
   <footer>Lunes a viernes de 9 a 21 h · Sábados servicio a domicilio</footer>
 </main>
+<script>
+  /* Redes públicas para la cancha. NoWar-fi (transmisión) NO va aquí. */
+  var REDES = ['War-fix', 'War-fiy', 'War-fiz'];
+  var CLAVE = 'LigaAGL';
+
+  var velo = document.getElementById('velo');
+  var paso1 = document.getElementById('paso1');
+  var paso2 = document.getElementById('paso2');
+
+  function mostrarRedes() {
+    // Reparte a la gente entre las 3 redes al azar, para que no se llene solo una.
+    var guardada = null;
+    try { guardada = localStorage.getItem('redWifi'); } catch (e) {}
+    var red = REDES.indexOf(guardada) >= 0 ? guardada : REDES[Math.floor(Math.random() * REDES.length)];
+    try { localStorage.setItem('redWifi', red); } catch (e) {}
+    document.getElementById('redSugerida').textContent = red;
+    document.querySelectorAll('.red-lista span').forEach(function (s) {
+      s.classList.toggle('elegida', s.textContent === red);
+    });
+    paso1.hidden = true; paso2.hidden = false;
+  }
+
+  document.getElementById('abrirWifi').addEventListener('click', function () { velo.hidden = false; });
+  document.getElementById('cerrarWifi').addEventListener('click', function () { velo.hidden = true; });
+  velo.addEventListener('click', function (e) { if (e.target === velo) velo.hidden = true; });
+  document.getElementById('guardarYConectar').addEventListener('click', function () {
+    // Deja que el celular abra/descargue los contactos y luego muestra el wifi.
+    setTimeout(mostrarRedes, 1200);
+  });
+  document.getElementById('copiarClave').addEventListener('click', function () {
+    var b = this;
+    var listo = function () { b.textContent = '¡Copiada! Ahora ve a Ajustes → Wifi'; };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(CLAVE).then(listo, function () { b.textContent = 'Contraseña: ' + CLAVE; });
+    } else { b.textContent = 'Contraseña: ' + CLAVE; }
+  });
+</script>
 </body>
 </html>
