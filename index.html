@@ -100,6 +100,25 @@
     Quiero wifi gratis
   </button>
 
+
+  <!-- ===== AL ESCANEAR: GUARDAR CONTACTOS ===== -->
+  <div class="velo" id="veloContactos" hidden>
+    <div class="caja" role="dialog" aria-modal="true" aria-labelledby="tituloContactos">
+      <button class="cerrar" type="button" id="cerrarContactos" aria-label="Cerrar">×</button>
+      <div id="c-paso1">
+        <h2 id="tituloContactos">👋 ¡Hola! Guárdanos en tu celular</h2>
+        <p>Con un toque guardas a <b>R.E.L.E.</b>, <b>Webside</b> y <b>Acoterm</b>: reparación de equipos, páginas web, sistemas y climas.</p>
+        <a class="accion" id="guardarContactos" href="contactos.vcf" download="War-Company-contactos.vcf">Guardar contactos</a>
+        <button class="interes" type="button" id="soloVer" style="width:100%;background:none;cursor:pointer;font:inherit">Ahora no, solo quiero ver la tarjeta</button>
+      </div>
+      <div id="c-paso2" hidden>
+        <h2>¡Listo! 🙌</h2>
+        <p>Si tu celular no los guardó solo, abre el archivo que se descargó y toca <b>Agregar</b>.</p>
+        <button class="accion" type="button" id="verTarjeta">Ver la tarjeta</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== VENTANA DEL WIFI ===== -->
   <div class="velo" id="velo" hidden>
     <div class="caja" role="dialog" aria-modal="true" aria-labelledby="tituloWifi">
@@ -212,6 +231,27 @@
       navigator.clipboard.writeText(CLAVE).then(listo, function () { b.textContent = 'Contraseña: ' + CLAVE; });
     } else { b.textContent = 'Contraseña: ' + CLAVE; }
   });
+</script>
+<script>
+  /* Al escanear la tarjeta, lo primero es guardar los contactos (una vez por celular) */
+  (function () {
+    var v = document.getElementById('veloContactos');
+    var visto = false;
+    try { visto = localStorage.getItem('contactosRELE') === '1'; } catch (e) {}
+    function cerrar() { v.hidden = true; try { localStorage.setItem('contactosRELE', '1'); } catch (e) {} }
+    if (!visto) setTimeout(function () { v.hidden = false; }, 700);
+    document.getElementById('cerrarContactos').addEventListener('click', cerrar);
+    document.getElementById('soloVer').addEventListener('click', cerrar);
+    document.getElementById('verTarjeta').addEventListener('click', cerrar);
+    v.addEventListener('click', function (e) { if (e.target === v) cerrar(); });
+    document.getElementById('guardarContactos').addEventListener('click', function () {
+      try { localStorage.setItem('contactosRELE', '1'); } catch (e) {}
+      setTimeout(function () {
+        document.getElementById('c-paso1').hidden = true;
+        document.getElementById('c-paso2').hidden = false;
+      }, 1200);
+    });
+  })();
 </script>
 <script src="matrix.js"></script>
 </body>
