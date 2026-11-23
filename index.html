@@ -19,8 +19,6 @@
   body{
     font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;
     padding:max(28px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom));
-    background-image:linear-gradient(var(--borde) 1px,transparent 1px),linear-gradient(90deg,var(--borde) 1px,transparent 1px);
-    background-size:44px 44px;background-position:center top;
   }
   main{max-width:440px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
   .logo{width:104px;height:104px;margin-top:8px}
@@ -76,6 +74,10 @@
   footer{margin-top:26px;font-size:14px;color:var(--texto-2);text-align:center}
   a:focus-visible{outline:3px solid var(--verde-suave);outline-offset:3px}
   @media (prefers-reduced-motion:reduce){.enlace{transition:none}}
+  html,body{background:#0B140E}
+  #matrix{position:fixed;inset:0;z-index:0;pointer-events:none}
+  main{position:relative;z-index:1;background:rgba(11,20,14,.62);border-radius:22px;padding:18px 14px;box-shadow:0 0 0 1px rgba(140,198,63,.18),0 0 40px rgba(140,198,63,.08)}
+  .velo{z-index:10}
 </style>
 </head>
 <body>
@@ -211,5 +213,6 @@
     } else { b.textContent = 'Contraseña: ' + CLAVE; }
   });
 </script>
+<script src="matrix.js"></script>
 </body>
 </html>
